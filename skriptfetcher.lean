@@ -64,17 +64,17 @@ def sources : List Skript := [
   }
 ]
 
-def outputDir : System.FilePath := System.FilePath.mk "./output"
-
-def main : IO Unit := do
+def main (args : List String) : IO Unit := do
+  let outputDir : System.FilePath := match args.length with
+    | 0 => System.FilePath.mk "./output"
+    | _ => System.FilePath.mk $ args.get! 0
+  if args.length = 0 then
+    IO.println "You may specify the output directory as an argument."
+    IO.println s!"Falling back to default ouptut directory \"{outputDir}\""
   IO.println "This script downloads the following sources:"
   for skript in sources do
     IO.println s!"- {skript.name} by {skript.author} ({skript.year})"
   IO.println s!"These will be saved in {outputDir}"
-  IO.println "Deleting old skripts..."
-  IO.FS.createDirAll outputDir
-  IO.FS.removeDirAll outputDir
-  IO.FS.createDirAll outputDir
   IO.println "Downloading sources..."
   for skript in sources do
     let file := outputDir / System.FilePath.mk skript.fileName.toString
