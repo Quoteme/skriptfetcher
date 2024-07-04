@@ -51,7 +51,7 @@ def sources : List Skript := [
     year := 2022
   },
   {
-    url := URL.fromString "https://www.math.uni-duesseldorf.de/~internet/MT2-V-S24/kurzskript.pdf" |>.get!,
+    url := URL.fromString "https://www.math.uni-duesseldorf.de/~internet/MT1-V-W23/kurzskript.pdf" |>.get!,
     name := "Modelltheorie 1",
     author := "Prof. Immanuel Halupczok",
     year := 2023
